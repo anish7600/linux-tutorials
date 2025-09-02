@@ -21,11 +21,11 @@ class MainContent(VerticalScroll):
         yield Static(WelcomeContent.get_welcome_message(), id="content-text", classes="content")
     
     def update_content(self, content: str):
-        """Update the main content area"""
+        """Update the main content area with scrollable content"""
         content_widget = self.query_one("#content-text", Static)
         content_widget.update(content)
         # Reset scroll position to top when updating content
-        self.scroll_to(y=0)
+        self.scroll_to(y=0, animate=False)
     
     def show_welcome(self):
         """Show the welcome screen"""
@@ -33,24 +33,28 @@ class MainContent(VerticalScroll):
         self.update_content(WelcomeContent.get_welcome_message())
     
     def show_basic_menu(self):
-        """Show basic topics menu"""
+        """Show basic topics menu with scrolling"""
         self.current_view = "basic_menu"
-        self.update_content(BasicTopicsContent.get_menu_content())
+        content = BasicTopicsContent.get_menu_content()
+        self.update_content(content)
     
     def show_intermediate_menu(self):
-        """Show intermediate topics menu"""
+        """Show intermediate topics menu with scrolling"""
         self.current_view = "intermediate_menu"
-        self.update_content(IntermediateTopicsContent.get_menu_content())
+        content = IntermediateTopicsContent.get_menu_content()
+        self.update_content(content)
     
     def show_advanced_menu(self):
-        """Show advanced topics menu"""
+        """Show advanced topics menu with scrolling"""
         self.current_view = "advanced_menu"
-        self.update_content(AdvancedTopicsContent.get_menu_content())
+        content = AdvancedTopicsContent.get_menu_content()
+        self.update_content(content)
     
     def show_help(self):
         """Show help information"""
         self.current_view = "help"
-        self.update_content(WelcomeContent.get_help_content())
+        content = WelcomeContent.get_help_content()
+        self.update_content(content)
     
     def show_topic_content(self, topic_level: str, topic_id: str):
         """Show specific topic content"""
@@ -65,3 +69,21 @@ class MainContent(VerticalScroll):
             content = f"Content for {topic_id} coming soon!"
         
         self.update_content(content)
+    
+    def on_mount(self) -> None:
+        """Initialize the content area and set layout properties"""
+        # Configure content area styles programmatically
+        self.styles.width = "100%"
+        self.styles.height = "100%"
+        self.styles.padding = 0
+        
+        # Configure content text widget
+        content_widget = self.query_one("#content-text")
+        content_widget.styles.width = "100%"
+        content_widget.styles.height = "auto"
+        content_widget.styles.min_height = "100%"
+        content_widget.styles.padding = 1
+        content_widget.styles.margin = 0
+        
+        # Ensure the content starts at the top
+        self.scroll_to(y=0, animate=False)

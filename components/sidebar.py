@@ -22,7 +22,7 @@ class Sidebar(Container):
     current_state = reactive(NavigationState.MAIN_MENU)
     
     def compose(self) -> ComposeResult:
-        yield Static("📚 Linux Tutorial", classes="sidebar-title")
+        yield Static("📚 Linux Ref. Guide", classes="sidebar-title")
         yield Container(id="menu-container")
     
     def watch_current_state(self, state: NavigationState) -> None:

@@ -1,10 +1,10 @@
 /* styles/app.css */
 Screen {
     layout: vertical;
-    background: navy;
+    /* background: navy; */
     color: white;
 }
-Button {
+/* Button {
     color: yellow;
     background: blue;
-}
+} */

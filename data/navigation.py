@@ -28,7 +28,7 @@ class MenuStructure:
         MenuItem("Basic Topics", "basic", "Essential Linux fundamentals"),
         MenuItem("Intermediate Topics", "intermediate", "System administration skills"),
         MenuItem("Advanced Topics", "advanced", "Expert-level Linux mastery"),
-        MenuItem("Exit", "exit", "Quit the tutorial")
+        MenuItem("Exit", "exit", "Quit")
     ]
     
     BASIC_MENU_ITEMS = [
@@ -76,9 +76,9 @@ class MenuStructure:
     def get_menu_title(cls, state: NavigationState) -> str:
         """Get the title for a specific navigation state"""
         titles = {
-            NavigationState.MAIN_MENU: "📚 Linux Tutorial",
+            NavigationState.MAIN_MENU: "📚 Linux Ref. Guide",
             NavigationState.BASIC_SUBMENU: "Basic Topics:",
             NavigationState.INTERMEDIATE_SUBMENU: "Intermediate Topics:",
             NavigationState.ADVANCED_SUBMENU: "Advanced Topics:"
         }
-        return titles.get(state, "Linux Tutorial")
+        return titles.get(state, "Linux Ref. Guide")
